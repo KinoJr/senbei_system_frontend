@@ -181,7 +181,7 @@
 
         <template #footer>
             <div class="dialog-footer">
-                <el-button type="primary" @click="submitForm">提 交</el-button>
+                <el-button type="primary" :loading="subLoading" @click="submitForm">提 交</el-button>
                 <el-button @click="cancel">取 消</el-button>
             </div>
         </template>
@@ -323,6 +323,7 @@ const payOpen = ref(false);
 const payFormRef = ref();
 const payform = ref({});
 const paymentAmount = ref(0);
+const subLoading = ref(false);
 const payloading = ref(false);
 
 // 使用记录
@@ -525,7 +526,9 @@ function submitForm() {
                 return
             }
             form.value.shoppingList = shoppingList.value
+            subLoading.value = true
             createOrUpdate(form.value).then(response => {
+                subLoading.value = false
                 proxy.$modal.msgSuccess("操作成功");
                 open.value = false;
                 emits("onClose")

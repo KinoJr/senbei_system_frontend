@@ -43,7 +43,7 @@
         </el-form>
         <template #footer>
             <div class="dialog-footer">
-                <el-button type="primary" @click="submitForm">确 定</el-button>
+                <el-button type="primary" @click="submitForm" :loading="loading">确 定</el-button>
                 <el-button @click="cancel">取 消</el-button>
             </div>
         </template>
@@ -61,6 +61,8 @@ const { proxy } = getCurrentInstance();
 const emits = defineEmits(["onClose"]);
 
 const props = defineProps(["categorys"]);
+
+const loading = ref(false);
 
 const open = ref(false);
 const title = ref("");
@@ -103,14 +105,17 @@ function handleUpdate(productId) {
 function submitForm() {
     proxy.$refs["formRef"].validate(valid => {
         if (valid) {
+            loading.value = true
             if (form.value.productId != undefined) {
                 updateProduct(form.value).then(response => {
+                    loading.value = false
                     proxy.$modal.msgSuccess("修改成功");
                     open.value = false;
                     emits("onClose")
                 });
             } else {
                 addProduct(form.value).then(response => {
+                    loading.value = false
                     proxy.$modal.msgSuccess("新增成功");
                     open.value = false;
                     emits("onClose")

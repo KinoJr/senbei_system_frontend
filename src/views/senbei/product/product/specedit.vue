@@ -15,7 +15,7 @@
             </el-form-item>
             <el-form-item label="上架数量" prop="specNum">
                 <el-input-number v-model="form.specNum" controls-position="right" :min="0" :max="99999" :step="1"
-                    step-strictly />
+                    step-strictly disabled />
             </el-form-item>
             <el-form-item label="规格顺序" prop="specSort">
                 <el-input-number v-model="form.specSort" controls-position="right" :min="0" :max="99999" :step="1"

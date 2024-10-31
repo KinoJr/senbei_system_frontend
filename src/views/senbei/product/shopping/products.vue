@@ -69,7 +69,7 @@
                             <!-- <el-input-number v-model="form.specPrice" controls-position="right" :min="0" disabled/> -->
                         </el-form-item>
                         <el-form-item label="购买数量" prop="buyNum">
-                            <el-input-number v-model="form.buyNum" controls-position="right" :min="1" :max="99999"
+                            <el-input-number v-model="form.buyNum" controls-position="right" :min="1" :max="form.specNum"
                                 :step="1" step-strictly @change="buyNumChange" />
                         </el-form-item>
                         <el-form-item label="总额(¥)" prop="buySum">
@@ -197,6 +197,7 @@ function onClickSpec(spec) {
     form.value.productName = productName.value
     form.value.specName = spec.specName
     form.value.specPrice = spec.specPrice
+    form.value.specNum = spec.specNum
     form.value.buyNum = 1
     form.value.buySum = form.value.specPrice * form.value.buyNum
 }

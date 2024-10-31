@@ -1,0 +1,149 @@
+{
+    "hello": "hello",
+    "language": {
+        "en": "English",
+        "zh": "Chinese"
+    },
+    "dict": {
+        "resStatus":{
+            "0":"Success",
+            "1":"Fail"
+        },
+        "whether": {
+            "0": "No",
+            "1": "Yes"
+        },
+        "disable": {
+            "0": "Normal",
+            "1": "Deactivate"
+        }
+    },
+    "public": {
+        "add": "Add",
+        "update": "Update",
+        "modify": "Modify",
+        "edit": "Edit",
+        "delete": "Delete",
+        "export": "Export",
+        "import": "Import",
+        "search": "Search",
+        "resetting": "Resetting",
+        "hideSearch": "HideSearch",
+        "refresh": "Refresh",
+        "explicitImplicitColumn": "Explicit Implicit Column",
+        "status": "Status",
+        "operate": "Operate",
+        "createdTime": "Created Time",
+        "createdBy": "Created By",
+        "updatedTime": "Updated Time",
+        "updatedBy": "Updated By",
+        "remark": "Remark",
+        "startDate": "Start Date",
+        "endDate": "End Date",
+        "startTime": "Start Time",
+        "endTime": "End Time",
+        "confirm": "Confirm",
+        "cancel": "Cancel",
+        "v": {
+            "select": "Please Select",
+            "content": "Please enter the content"
+        }
+    },
+    "menuNav": {
+        "home": "Home",
+        "systemManagement": "System Management",
+        "userManagement": "User Management",
+        "roleManagement": "Role Management",
+        "menuManagement": "Menu anagement",
+        "deptManagement": "Dept Management",
+        "postManagement": "Post Management",
+        "dictManagement": "Dict Management",
+        "configManagement": "Config Management",
+        "noticeManagement": "Notice Management",
+        "logManagement": "Log Management",
+        "operlog": "Operlog",
+        "logininfor": "Logininfor"
+    },
+    "login": {
+        "login": "Login",
+        "register": "Register",
+        "rememberPassword": "Remember Password",
+        "verificationCode": "Verification Code",
+        "resetPassword": "Reset Password"
+    },
+    "user": {
+        "a": {
+            "assigningRoles": "Assigning Roles"
+        },
+        "d":{
+            "sex": {
+                "0": "Man",
+                "1": "Women",
+                "2": "Unknow"
+            }
+        },
+        "t": {
+            "userId": "User Id",
+            "userName": "User Name",
+            "nickName": "Nick Name",
+            "deptName": "Dept Name",
+            "phonenumber": "phonenumber",
+            "email": "Email",
+            "status": "User Status",
+            "belongingDepartment": "Belonging Department",
+            "password": "User Password",
+            "sex": "Sex",
+            "post": "Post",
+            "role": "Role"
+        },
+        "v": {
+            "userId": "Please enter the user number",
+            "userName": "Please enter the user name",
+            "nickName": "Please enter the user nickname",
+            "phonenumber": "Please enter your phone number",
+            "email": "Please enter your email address",
+            "belongingDepartment": "Please select the department you belong to",
+            "password": "Please enter user password",
+            "sex": "Please select user gender",
+            "post": "Please select a position",
+            "role": "Please select a role"
+        }
+    },
+    "menu": {
+        "d":{
+            "showHide":{
+                "0":"Show",
+                "1":"Hide"
+            },
+            "type":{
+                "m":"Directory",
+                "c":"Menu",
+                "f":"Buttons"
+            }
+        }
+    },
+    "notice":{
+        "d":{
+            "type":{
+                "1":"Notifications",
+                "2":"Announcements"
+            }
+        }
+    },
+    "operlog":{
+        "d":{
+            "type":{
+                "0":"Other",
+                "1":"Add",
+                "2":"Edit",
+                "3":"Delete",
+                "4":"Authorization",
+                "5":"Export",
+                "6":"Import",
+                "7":"Forceful retreat",
+                "8":"Generate Code",
+                "9":"wipe data"
+            }
+        }
+    }
+}

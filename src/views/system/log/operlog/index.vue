@@ -62,6 +62,7 @@
             <el-empty description="No Data" />
          </template>
          <!-- <el-table-column type="selection" width="50" align="center" /> -->
+         <el-table-column type="index"/>
          <el-table-column label="日志编号" align="center" prop="_timestamp" />
          <el-table-column label="操作日期" align="center" prop="time" width="180" sortable="custom"
             :sort-orders="['descending', 'ascending']" />

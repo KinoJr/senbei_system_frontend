@@ -112,8 +112,8 @@
          </el-table-column>
          <el-table-column label="操作" align="center" class-name="small-padding fixed-width">
             <template #default="scope">
-               <el-button link type="primary" icon="View" @click="handleView(scope.row, scope.index)"
-                  v-hasPermi="['system:operlog:query']">详情</el-button>
+               <el-button link type="primary" icon="View" @click="handleView(scope.row, scope.index)">
+                  详情</el-button>
             </template>
          </el-table-column>
       </el-table>
@@ -122,15 +122,15 @@
          v-model:limit="queryParams.pageSize" @pagination="getList" />
 
       <!-- 操作日志详细 -->
-      <el-dialog title="操作日志详细" v-model="open" width="700px" append-to-body>
+      <el-dialog title="操作日志详细" v-model="open" width="90%" style="max-width: 800px;" append-to-body>
          <el-form :model="form" label-width="100px">
             <el-row>
                <el-col :span="12">
                   <el-form-item label="操作模块：">{{ form.data_title }} / {{ $t('operlog.d.type.' + form.data_businesstype)
                      }}</el-form-item>
                   <el-form-item label="登录信息：">{{ form.data_opername }} / {{ form.data_operip }} / {{
-                     form.data_operlocation
-                     }}</el-form-item>
+         form.data_operlocation
+      }}</el-form-item>
                </el-col>
                <el-col :span="12">
                   <el-form-item label="请求地址：">{{ form.data_operurl }}</el-form-item>

@@ -76,7 +76,7 @@
          </el-table-column>
          <el-table-column label="用户名称" align="center" prop="data_username" :show-overflow-tooltip="true" />
          <el-table-column label="用户类型" align="center" prop="data_usertype" :show-overflow-tooltip="true" />
-         <!-- <el-table-column label="IP地址" align="center" prop="data_ipaddr" :show-overflow-tooltip="true" /> -->
+         <el-table-column label="IP地址" align="center" prop="data_ipaddr" :show-overflow-tooltip="true" />
          <el-table-column label="登录地点" align="center" width="200" prop="data_loginlocation"
             :show-overflow-tooltip="true" />
          <el-table-column label="操作系统" align="center" prop="data_os" :show-overflow-tooltip="true" />

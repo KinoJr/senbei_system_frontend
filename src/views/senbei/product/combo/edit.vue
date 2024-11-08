@@ -51,9 +51,9 @@
                     {{ scope.row.productName + "(" + scope.row.specName + ")" }}
                 </template>
             </el-table-column>
-            <el-table-column label="产品单价" align="center" prop="comboListPrice">
+            <el-table-column label="产品单价" align="center" prop="specPrice">
                 <template #default="scope">
-                    {{ (scope.row.comboListPrice / 100).toFixed(2) }}
+                    {{ (scope.row.specPrice / 100).toFixed(2) }}
                 </template>
             </el-table-column>
             <el-table-column label="实际单价" align="center" prop="comboListPrice">
@@ -69,6 +69,9 @@
             </el-table-column>
             <el-table-column width="180" align="center" class-name="small-padding fixed-width">
                 <template #header>
+                    <el-button type="primary" round @click="onOpenBatchForm">
+                        批量
+                    </el-button>
                     <el-button type="primary" round @click="showProducts">
                         添加<el-icon class="el-icon--right">
                             <Plus />
@@ -119,6 +122,22 @@
         </template>
     </el-dialog>
 
+    <!-- 批量修改对话框 -->
+    <el-dialog title="批修改实际单价" v-model="batchOpen" width="90%"
+        style="max-width: 800px;" append-to-body :destroy-on-close="true" :close-on-press-escape="false">
+        <el-form ref="batchFormRef" :model="batchForm">
+            <el-form-item label="变更单价(¥)" prop="price">
+                <el-input-number v-model="batchForm.price" controls-position="right" :min="0"
+                    :step="0.01" step-strictly />
+            </el-form-item>
+        </el-form>
+        <template #footer>
+            <div class="dialog-footer">
+                <el-button type="primary" @click="submitBatchForm">确 定</el-button>
+            </div>
+        </template>
+    </el-dialog>
+
     <Products ref="productsRef" @onClose="onSpecClose" @onSubmit="onSpecSubmit" />
 </template>
 <script setup name="edit">
@@ -144,7 +163,14 @@ const rules = {
 
 const rowOpen = ref(false);
 const rowform = ref({});
-const comboListPrice = ref(0)
+const comboListPrice = ref(0);
+
+const batchOpen = ref(false)
+const batchFormRef = ref()
+const batchForm = ref({
+    price: 0
+});
+
 
 const value = ref('1')
 const options = ref([{
@@ -168,6 +194,20 @@ watch(comboList, (newValue, OldValue) => {
 }, {
     deep: true // 监听数组时必须设置
 })
+
+// 打开批量修改
+function onOpenBatchForm() {
+    batchForm.value.price = 0
+    batchOpen.value = true
+}
+// 批量修改价格
+function submitBatchForm() {
+    for (let item of comboList.value) {
+        item.comboListPrice = batchForm.value.price * 100
+        item.comboListSum = item.comboListPrice * item.comboListNum
+    }
+    batchOpen.value = false
+}
 
 // 获取清单产品列表
 function getComboSpec(comboId) {

@@ -3,7 +3,7 @@
       <el-form :model="queryParams" ref="queryRef" :inline="true" v-show="showSearch">
          <el-form-item label="客户账号" prop="userName">
             <el-select v-model="queryParams.userId" filterable placeholder="请选择客户账号" style="width: 200px">
-               <el-option v-for="item in userOptions" :key="item.userId" :label="item.userName" :value="item.userId" />
+               <el-option v-for="item in userOptions" :key="item.userId" :label="(item.userName + ' - ' + item.nickName)" :value="item.userId" />
             </el-select>
          </el-form-item>
          <el-form-item label="订单编号" prop="shoppingNo">
@@ -61,7 +61,7 @@
             <el-empty description="No Data" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <!-- <el-table-column label="订单ID" align="center" prop="shoppingId" /> -->
          <el-table-column label="订单编号" align="center" prop="shoppingNo" />
          <el-table-column label="客户账号" align="center" prop="shoppingSettlement">

@@ -48,7 +48,7 @@
             <el-empty description="暂无数据，去录入一些数据吧~" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <el-table-column label="记录编号" align="center" prop="routine_code" />
          <el-table-column label="检查编号" align="center" prop="group_no" />
          <el-table-column label="姓名(昵称)" align="center" prop="routine_name" />

@@ -32,7 +32,7 @@
             <el-empty description="No Data" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <!-- <el-table-column label="记录ID" align="center" prop="doctorRoundsId" /> -->
          <!-- <el-table-column label="房号" align="center" prop="doctorroundsCode" /> -->
          <!-- <el-table-column label="档案ID" align="center" prop="archivalId" /> -->

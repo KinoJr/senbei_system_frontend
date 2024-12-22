@@ -52,7 +52,7 @@
             <el-empty description="No Data" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <!-- <el-table-column label="采购ID" align="center" prop="storeId" /> -->
          <el-table-column label="产品名称" align="center" prop="productName" />
          <el-table-column label="产品规格" align="center" prop="specName" />

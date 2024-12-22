@@ -56,7 +56,7 @@
             <el-empty description="No Data" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <!-- <el-table-column label="采购ID" align="center" prop="purchaseId" /> -->
          <el-table-column label="采购编号" align="center" prop="purchaseNo" />
          <el-table-column label="采购编号(摘)" align="center" prop="purchaseExtractNo" />

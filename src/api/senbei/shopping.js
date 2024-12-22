@@ -59,3 +59,11 @@ export function createOrUpdate(data) {
     data: data
   })
 }
+
+// 统计每月营业额
+export function statisticsByYear(year) {
+  return request({
+    url: '/senbei/shopping/statisticsByYear/' + year,
+    method: 'get'
+  })
+}

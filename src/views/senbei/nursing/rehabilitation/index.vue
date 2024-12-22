@@ -44,7 +44,7 @@
             <el-empty description="No Data" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <!-- <el-table-column label="分类ID" align="center" prop="rehabilitationId" /> -->
          <el-table-column label="员工账号" align="center" prop="userId">
             <template #default="scope">

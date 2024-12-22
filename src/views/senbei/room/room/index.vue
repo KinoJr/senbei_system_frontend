@@ -47,7 +47,7 @@
             <el-empty description="暂无数据，去录入一些数据吧~" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <!-- <el-table-column label="房间ID" align="center" prop="roomId" /> -->
          <el-table-column label="楼层" align="center" prop="roomFloor" />
          <el-table-column label="房间编号" align="center" prop="roomNo" />

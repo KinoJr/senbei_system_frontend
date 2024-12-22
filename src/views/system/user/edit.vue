@@ -4,7 +4,7 @@
         <el-form :model="form" :rules="rules" ref="userRef" label-width="80px" label-position="top">
             <el-row :gutter="20">
                 <el-col :span="12">
-                    <el-form-item :label="$t('user.t.nickName')" prop="nickName">
+                    <el-form-item label="姓名" prop="nickName">
                         <el-input v-model="form.nickName" :placeholder="$t('user.v.nickName')" maxlength="30" />
                     </el-form-item>
                 </el-col>
@@ -80,7 +80,7 @@
                     </el-form-item>
                 </el-col>
             </el-row>
-            <el-row>
+            <el-row :gutter="20">
                 <el-col :span="12">
                     <el-form-item label="单独登陆">
                         <el-radio-group v-model="form.alone">
@@ -89,7 +89,39 @@
                         </el-radio-group>
                     </el-form-item>
                 </el-col>
+                <el-col :span="12">
+                    <el-form-item label="底薪(RMB)">
+                        <el-input-number style="width: 100%;" v-model="form.basicSalary" controls-position="right"
+                            :min="0" :max="99999" :step="0.01" step-strictly :precision="2">
+                            <template #suffix>
+                                <span>RMB</span>
+                            </template>
+                        </el-input-number>
+                    </el-form-item>
+                </el-col>
             </el-row>
+
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="身份证号">
+                        <el-input v-model="form.idCard" placeholder="请输入身份证号" maxlength="18" />
+                    </el-form-item>
+                </el-col>
+                <el-col :span="12">
+                    <el-form-item label="紧急联系电话">
+                        <el-input v-model="form.emergencyPhone" placeholder="请输入紧急联系电话" maxlength="15" />
+                    </el-form-item>
+                </el-col>
+            </el-row>
+
+            <el-row :gutter="20">
+                <el-col :span="12">
+                    <el-form-item label="紧急联系人">
+                        <el-input v-model="form.emergencyContacts" placeholder="请输入紧急联系人" maxlength="18" />
+                    </el-form-item>
+                </el-col>
+            </el-row>
+
             <el-row>
                 <el-col :span="24">
                     <el-form-item label="通讯地址">

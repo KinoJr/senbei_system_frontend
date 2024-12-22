@@ -29,7 +29,7 @@
 
         <!-- 待结算列表 -->
         <el-table v-loading="loading" :data="dataList">
-            <el-table-column type="index" width="80" />
+            <el-table-column label="序号" type="index" width="80" />
             <!-- <el-table-column label="员工账号" align="center" prop="userId">
                 <template #default="scope">
                     {{ getUserNameById(scope.row.userId) }}

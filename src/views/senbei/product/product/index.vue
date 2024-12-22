@@ -60,7 +60,7 @@
             <el-empty description="No Data" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <el-table-column label="IMG" width="105" align="center" prop="productImg">
             <template #default="scope">
                <ImagePreview width="80px" height="80px"

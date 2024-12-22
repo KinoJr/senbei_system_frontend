@@ -42,7 +42,7 @@
             <el-empty description="No Data" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <!-- <el-table-column label="分类ID" align="center" prop="productCategoryId" /> -->
          <el-table-column label="分类名称" align="center" prop="productCategoryName" />
          <el-table-column label="分类排序" align="center" prop="productCategorySort" />

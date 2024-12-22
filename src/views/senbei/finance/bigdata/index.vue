@@ -135,77 +135,29 @@
 </el-row> -->
 
     <!-- 仪表盘2 -->
-    <!-- <el-row :gutter="16">
+    <el-row :gutter="16">
       <el-col :xs="24" :sm="24" :lg="12">
         <el-card class="chart-wrapper" shadow="hover">
           <template #header>
-            <span>订单产品</span>
+            <div style="overflow: hidden;">
+              <span style="float: left;">营业额/(年份) </span>
+              <el-date-picker v-model="year" type="year" placeholder="请选择年份" :default-value="new Date()"
+                @change="changeYear" format="YYYY" value-format="YYYY" date-format="YYYY" style="float: right;" />
+            </div>
           </template>
-          <div id="column" style="height: 30vh;"></div>
+          <div id="container" style="height: 30vh;"></div>
         </el-card>
       </el-col>
-      <el-col :xs="24" :sm="24" :lg="12">
-        <el-card class="chart-wrapper" shadow="hover">
-          <template #header>
-            <span>营业额</span>
-          </template>
-          <div id="dualAxes" style="height: 30vh;"></div>
-        </el-card>
-      </el-col>
-    </el-row> -->
-    <!-- <el-row :gutter="16">
-      <el-col :xs="24" :sm="24" :lg="12">
-        <el-card class="chart-wrapper" shadow="hover">
-          <template #header>
-            <span>产品/服务</span>
-          </template>
-          <div id="column" style="height: 30vh;"></div>
-        </el-card>
-      </el-col>
-      <el-col :xs="24" :sm="24" :lg="12">
-        <el-card class="chart-wrapper" shadow="hover">
-          <template #header>
-            <span>漏斗图</span>
-          </template>
-          <div id="funnel" style="height: 30vh;"></div>
-        </el-card>
-      </el-col>
-    </el-row> -->
-
-    <!-- 通知公告 -->
-    <!-- <el-dialog v-model="dialogVisible" width="90%" style="max-width: 800px;">
-      <template #header="{ close, titleId, titleClass }">
-        <el-row>
-          <el-col :span="20">
-            <el-text size="large">{{ dialogDetails.dTitle }}</el-text>
-          </el-col>
-          <el-col :span="4" style="text-align: right;">
-            <el-tag v-if="dialogDetails.dType === '1'" type="success">通知</el-tag>
-            <el-tag v-if="dialogDetails.dType === '2'" type="primary">公告</el-tag>
-            <el-tag v-if="dialogDetails.dType === '3'" type="warning">告警</el-tag>
-            <el-tag v-if="dialogDetails.dType === '4'" type="danger">异常</el-tag>
-          </el-col>
-        </el-row>
-      </template>
-      <editor v-model="dialogDetails.dContent" :min-height="192" />
-      <span>
-        创建时间：{{ dialogDetails.dTime }} 创建者：{{ dialogDetails.dBy }}
-      </span>
-    </el-dialog> -->
+    </el-row>
   </div>
 </template>
 
 <script setup name="Index">
 import { onMounted, ref } from 'vue';
 import countTo from 'vue3-count-to';
-import { Line } from '@antv/g2plot';
-import { Pie } from '@antv/g2plot';
-import { Column } from '@antv/g2plot';
-import { Funnel } from '@antv/g2plot';
-import { Rose } from '@antv/g2plot';
-import { DualAxes } from '@antv/g2plot';
+import { Bar } from '@antv/g2plot';
 import { getStatistics } from "@/api/senbei/finance";
-import { listNotice } from "@/api/system/notice";
+import { statisticsByYear } from "@/api/senbei/shopping";
 
 const router = useRouter();
 
@@ -213,21 +165,17 @@ const { proxy } = getCurrentInstance();
 
 const dateTime = ref()
 
-const noticeList = ref([]) // 通知公告
-const noticeTotal = ref(0) // 通知公告数
-const noticeQueryParams = ref({
-  pageNum: 1,
-  pageSize: 10,
-  status: "1",
-  belong: "1"
-})
-
 const statistic = ref({
   expenses: 0,
   orderNum: 0,
   sales: 0,
   userNum: 0
 })
+
+const year = ref("" + new Date().getFullYear())
+function changeYear(e) {
+  columnFun()
+}
 
 function onClickUser(num) {
   if (Number(num) == 0) {
@@ -310,189 +258,48 @@ function initStatistic(e) {
       userNum: response.userNum,
     }
   });
-  // 获取通知公告
-  // listNotice(noticeQueryParams.value).then(response => {
-  //   noticeList.value = response.rows || [];
-  //   noticeTotal.value = response.total;
-  // });
 }
 
-/** 折线图 */
-const lineRef = ref()
-function lineFun() {
-  const data = [
-    { year: '1991', value: 3 },
-    { year: '1992', value: 4 },
-    { year: '1993', value: 3.5 },
-    { year: '1994', value: 5 },
-    { year: '1995', value: 4.9 },
-    { year: '1996', value: 6 },
-    { year: '1997', value: 7 },
-    { year: '1998', value: 9 },
-    { year: '1999', value: 13 },
-  ]
-  lineRef.value = new Line('line', {
-    data: data,
-    xField: 'year',
-    yField: 'value',
-  });
-  lineRef.value.render();
-}
-/** 多折线图 */
-const dualAxes = ref()
-function dualAxesFun() {
-  const data = [
-    { year: '1991', value: 3, count: 10, dname: "订单数", yname: "营业额" },
-    { year: '1992', value: 4, count: 4, dname: "订单数", yname: "营业额" },
-    { year: '1993', value: 3.5, count: 5, dname: "订单数", yname: "营业额" },
-    { year: '1994', value: 5, count: 5, dname: "订单数", yname: "营业额" },
-    { year: '1995', value: 4.9, count: 8, dname: "订单数", yname: "营业额" },
-    { year: '1996', value: 6, count: 35, dname: "订单数", yname: "营业额" },
-    { year: '1997', value: 7, count: 7, dname: "订单数", yname: "营业额" },
-    { year: '1998', value: 9, count: 1, dname: "订单数", yname: "营业额" },
-    { year: '1999', value: 13, count: 20, dname: "订单数", yname: "营业额" },
-  ];
-
-  dualAxes.value = new DualAxes('dualAxes', {
-    data: [data, data],
-    xField: 'year',
-    yField: ['value', 'count'],
-    seriesField: 'type',
-    geometryOptions: [
-      {
-        seriesField: 'yname',
-        geometry: 'line',
-        color: '#5B8FF9',
-      },
-      {
-        seriesField: 'dname',
-        geometry: 'line',
-        color: '#5AD8A6',
-      },
-    ],
-  });
-
-  dualAxes.value.render();
-}
-
-/** 饼图 */
-const piePlot = ref()
-function pieFun() {
-  const data = [
-    { type: '生活用品', value: 27 },
-    { type: '电子产品', value: 25 },
-    { type: '康复服务', value: 18 },
-    { type: '其他', value: 5 },
-  ];
-  piePlot.value = new Pie('pie', {
-    data: data,
-    angleField: 'value',
-    colorField: 'type',
-  });
-  piePlot.value.render();
-}
-/** 柱状图 */
-const columnPlot = ref()
+/** 条形图 */
+const bar = ref()
 function columnFun() {
-  const data = [
-    {
-      "type": "家具家电",
-      "sales": 38
-    },
-    {
-      "type": "粮油副食",
-      "sales": 52
-    },
-    {
-      "type": "生鲜水果",
-      "sales": 61
-    },
-    {
-      "type": "美容洗护",
-      "sales": 145
-    },
-    {
-      "type": "母婴用品",
-      "sales": 48
-    },
-    {
-      "type": "进口食品",
-      "sales": 38
-    },
-    {
-      "type": "食品饮料",
-      "sales": 38
-    },
-    {
-      "type": "家庭清洁",
-      "sales": 38
+  statisticsByYear(year.value).then(response => {
+    const array = response
+    let data = []
+    for (let index = 0; index < array.length; index++) {
+      const element = array[index];
+      data.push({
+        "type": element.month + "月",
+        "sales": (element.sales / 100)
+      })
     }
-  ];
-  columnPlot.value = new Column('column', {
-    data: data,
-    xField: 'type',
-    yField: 'sales',
+    if (!bar.value) {
+      bar.value = new Bar('container', {
+        data: data,
+        xField: 'sales',
+        yField: 'type',
+        seriesField: 'type',
+        legend: {
+          position: 'right',
+        },
+        label: {
+          // 可手动配置 label 数据标签位置
+          position: 'right', // 'left', 'middle', 'right'
+          offset: 4,
+        },
+        barStyle: { radius: [2, 2, 0, 0] },
+      });
+      bar.value.render();
+    } else {
+      bar.value.changeData(data)
+    }
+    
   });
-  columnPlot.value.render();
 }
-/** 玫瑰图 */
-const rosePlot = ref()
-function rosePlotFun() {
-  const data = [
-    { type: '服务', value: 27 },
-    { type: '电子产品', value: 25 },
-    { type: '衣物', value: 18 },
-    { type: '生活用品', value: 15 },
-    { type: '其他', value: 5 },
-  ];
-  rosePlot.value = new Rose('rosePlot', {
-    data,
-    xField: 'type',
-    yField: 'value',
-    seriesField: 'type',
-    radius: 0.8,
-    legend: {
-      position: 'right',
-    },
-  });
-  rosePlot.value.render();
-}
-/** 漏斗图 */
-// const plot = ref()
-// function plotFun() {
-//   const data = [
-//     { stage: '简历筛选', number: 253 },
-//     { stage: '初试人数', number: 151 },
-//     { stage: '复试人数', number: 113 },
-//     { stage: '录取人数', number: 87 },
-//     { stage: '入职人数', number: 59 },
-//   ];
-//   plot.value = new Funnel('funnel', {
-//     data: data,
-//     xField: 'stage',
-//     yField: 'number',
-//     legend: false,
-//   });
-//   plot.value.render();
-// }
-
 
 onMounted(() => {
   initStatistic()
-  // if(!dualAxes.value) {
-  //   dualAxesFun()
-  // }
-  // if(!piePlot.value) {
-  //   pieFun()
-  // }
-  // if(!columnPlot.value) {
-  //   columnFun()
-  // }
-  // if(!rosePlot.value) {
-  //   rosePlotFun()
-  // }
-  // lineFun()
-  // plotFun()
+  columnFun()
 })
 
 </script>

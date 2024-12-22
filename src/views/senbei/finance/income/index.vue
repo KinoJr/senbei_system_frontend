@@ -11,6 +11,12 @@
                <el-option label="支出" value="2" />
             </el-select>
          </el-form-item>
+
+         <el-form-item label="收支时间" style="width: 308px;">
+            <el-date-picker v-model="dateRange" value-format="YYYY-MM-DD" type="daterange" range-separator="-"
+               :start-placeholder="$t('public.startDate')" :end-placeholder="$t('public.endDate')"></el-date-picker>
+         </el-form-item>
+
          <el-form-item>
             <el-button type="primary" icon="Search" @click="handleQuery">搜索</el-button>
             <el-button icon="Refresh" @click="resetQuery">重置</el-button>
@@ -42,7 +48,7 @@
             <el-empty description="No Data" />
          </template>
          <el-table-column type="selection" width="55" align="center" />
-         <el-table-column type="index" width="80" />
+         <el-table-column label="序号" type="index" width="80" />
          <!-- <el-table-column label="收支ID" align="center" prop="incomeId" /> -->
          <el-table-column label="收支名称" align="center" prop="incomeName" />
          <el-table-column label="收支数量" align="center" prop="incomeNum" />
@@ -99,6 +105,8 @@ const single = ref(true);
 const multiple = ref(true);
 const total = ref(0);
 
+const dateRange = ref([])
+
 const editRef = ref()
 
 const queryParams = ref({
@@ -112,7 +120,7 @@ const queryParams = ref({
 /** 查询收支列表 */
 function getList() {
    loading.value = true;
-   listIncome(queryParams.value).then(response => {
+   listIncome(proxy.addDateRange(queryParams.value, dateRange.value)).then(response => {
       postList.value = response.rows;
       total.value = response.total;
       loading.value = false;
@@ -125,6 +133,7 @@ function handleQuery() {
 }
 /** 重置按钮操作 */
 function resetQuery() {
+   dateRange.value = []
    proxy.resetForm("queryRef");
    handleQuery();
 }

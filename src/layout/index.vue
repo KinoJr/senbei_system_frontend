@@ -9,7 +9,7 @@
       </div>
       <app-main />
       <settings ref="settingRef" />
-    </div> 
+    </div>
   </div>
 </template>
 
@@ -38,12 +38,15 @@ const classObj = computed(() => ({
 }))
 
 const { width, height } = useWindowSize();
-const WIDTH = 450; // 设置到多少会隐藏菜单栏
+const WIDTH = 450; // refer to Bootstrap's responsive design
 
-watchEffect(() => {
+watch(() => device.value, () => {
   if (device.value === 'mobile' && sidebar.value.opened) {
     useAppStore().closeSideBar({ withoutAnimation: false })
   }
+})
+
+watchEffect(() => {
   if (width.value - 1 < WIDTH) {
     useAppStore().toggleDevice('mobile')
     useAppStore().closeSideBar({ withoutAnimation: true })

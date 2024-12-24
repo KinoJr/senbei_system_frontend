@@ -79,7 +79,7 @@ const { proxy } = getCurrentInstance();
 
 const menuList = ref([]);
 const loading = ref(true);
-const showSearch = ref(true);
+const showSearch = ref(false);
 const isExpandAll = ref(false);
 const refreshTable = ref(true);
 

@@ -104,7 +104,7 @@ const { proxy } = getCurrentInstance();
 
 const logininforList = ref([]);
 const loading = ref(true);
-const showSearch = ref(true);
+const showSearch = ref(false);
 const ids = ref([]);
 const single = ref(true);
 const multiple = ref(true);

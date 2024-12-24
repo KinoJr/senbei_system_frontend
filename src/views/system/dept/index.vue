@@ -74,7 +74,7 @@ const { proxy } = getCurrentInstance();
 
 const deptList = ref([]);
 const loading = ref(true);
-const showSearch = ref(true);
+const showSearch = ref(false);
 
 const isExpandAll = ref(true);
 const refreshTable = ref(true);

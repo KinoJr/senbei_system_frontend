@@ -72,7 +72,7 @@ const { proxy } = getCurrentInstance();
 
 const userList = ref([]);
 const loading = ref(true);
-const showSearch = ref(true);
+const showSearch = ref(false);
 const multiple = ref(true);
 const total = ref(0);
 const userIds = ref([]);

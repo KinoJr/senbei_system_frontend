@@ -56,7 +56,7 @@
       </el-row>
 
       <el-table ref="logininforRef" v-loading="loading" :data="logininforList" @selection-change="handleSelectionChange"
-         :default-sort="defaultSort" @sort-change="handleSortChange">
+         :default-sort="defaultSort" @sort-change="handleSortChange" border>
          <template #empty>
             <el-empty description="No Data" />
          </template>

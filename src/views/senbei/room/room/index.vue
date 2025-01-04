@@ -42,7 +42,7 @@
          <right-toolbar v-model:showSearch="showSearch" @queryTable="getList"></right-toolbar>
       </el-row>
 
-      <el-table v-loading="loading" :data="roomList" @selection-change="handleSelectionChange">
+      <el-table v-loading="loading" :data="roomList" @selection-change="handleSelectionChange" border>
          <template #empty="">
             <el-empty description="暂无数据，去录入一些数据吧~" />
          </template>

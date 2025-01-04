@@ -54,7 +54,7 @@
                <right-toolbar v-model:showSearch="showSearch" @queryTable="getList" :columns="columns"></right-toolbar>
             </el-row>
 
-            <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange">
+            <el-table v-loading="loading" :data="userList" @selection-change="handleSelectionChange" border>
                <template #empty>
                   <el-empty description="No Data" />
                </template>

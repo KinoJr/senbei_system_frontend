@@ -29,7 +29,7 @@
       </el-row>
 
       <el-table v-if="refreshTable" v-loading="loading" :data="menuList" row-key="menuId"
-         :default-expand-all="isExpandAll" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }">
+         :default-expand-all="isExpandAll" :tree-props="{ children: 'children', hasChildren: 'hasChildren' }" border>
          <template #empty>
             <el-empty description="No Data" />
          </template>

@@ -5,7 +5,7 @@
         style="width: 100%" clearable>
         <el-option v-for="item in rows" :key="item.id" :label="item.title + '-' + item.name" :value="item.id" />
       </el-select>
-      <el-table ref="multipleTableRef" :data="rows" @selection-change="handleSelectionChange">
+      <el-table ref="multipleTableRef" :data="rows" @selection-change="handleSelectionChange" border>
         <el-table-column type="selection" width="28" />
         <el-table-column label="房号" align="center" prop="title">
           <template #default="scope">

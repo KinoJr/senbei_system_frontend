@@ -44,7 +44,7 @@
     </el-row>
 
     <!-- 表格数据 -->
-    <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange">
+    <el-table v-loading="loading" :data="roleList" @selection-change="handleSelectionChange" border>
       <template #empty>
         <el-empty description="No Data" />
       </template>

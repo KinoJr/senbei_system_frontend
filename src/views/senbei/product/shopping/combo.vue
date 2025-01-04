@@ -35,7 +35,7 @@
             <el-segmented v-model="value" :options="options" />
         </div>
 
-        <el-table v-show="value === '1'" v-loading="specLoading" :data="comboList">
+        <el-table v-show="value === '1'" v-loading="specLoading" :data="comboList" border>
             <template #empty>
                 <el-empty description="No Data" />
             </template>

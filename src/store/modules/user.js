@@ -9,6 +9,7 @@ const useUserStore = defineStore(
       userId: 0,
       token: getToken(),
       name: '',
+      nickName: '',
       avatar: '',
       roles: [],
       permissions: []
@@ -51,6 +52,7 @@ const useUserStore = defineStore(
               this.roles = ['ROLE_DEFAULT']
             }
             this.name = user.userName
+            this.nickName = user.nickName
             this.avatar = avatar;
             resolve(res)
           }).catch(error => {

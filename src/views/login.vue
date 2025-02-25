@@ -70,6 +70,9 @@ import { getCodeImg } from "@/api/login";
 import Cookies from "js-cookie";
 import { encrypt, decrypt } from "@/utils/jsencrypt";
 import useUserStore from '@/store/modules/user'
+import { formatAxis } from '@/utils/ruoyi'
+import { ElNotification } from 'element-plus'
+import { ColdDrink } from '@element-plus/icons-vue'
 
 const userStore = useUserStore()
 const route = useRoute();
@@ -118,8 +121,16 @@ function handleLogin() {
         Cookies.remove("rememberMe");
       }
       // 调用action的登录方法
-      userStore.login(loginForm.value).then(() => {
-        router.push({ path: redirect.value || "/index" });
+      userStore.login(loginForm.value).then(async () => {
+        await router.push({ path: redirect.value || "/index" });
+        console.log("==>", userStore);
+        // 弹出问候语
+        await ElNotification({
+          title: `${formatAxis(new Date())}, ${userStore.nickName}, 欢迎回来！✨`,
+          message: `生活变的再糟糕，也不妨碍自己变得更好！加油，你比自己想象的更强大！💪`,
+          icon: ColdDrink,
+          duration: 5000
+        })
       }).catch(() => {
         loading.value = false;
         // 重新获取验证码

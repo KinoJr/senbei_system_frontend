@@ -52,7 +52,7 @@
                </el-tag>
             </template>
          </el-table-column>
-         <el-table-column label="创建时间" align="center" width="160" prop="createAt">
+         <el-table-column label="创建时间" align="center" width="160" prop="createdAt">
          </el-table-column>
          <el-table-column label="操作" align="center" width="210" class-name="small-padding fixed-width">
             <template #default="scope">

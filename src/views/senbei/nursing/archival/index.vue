@@ -58,6 +58,16 @@
         </template>
       </el-table-column>
       <el-table-column label="姓名" align="center" prop="archivalName" />
+      <el-table-column label="入住时长" align="center" prop="nights">
+        <template #default="scope">
+          {{ scope.row.nights }}天
+        </template>
+      </el-table-column>
+      <el-table-column label="起止日期" align="center">
+        <template #default="scope">
+          {{ scope.row.archivalStartDate }}~{{ scope.row.archivalEndDate }}
+        </template>
+      </el-table-column>
 
       <el-table-column label="类型" align="center" prop="archivalType">
         <template #default="scope">
@@ -121,7 +131,7 @@ import {
   getAppList,
   getRoomList,
 } from "@/api/senbei/archival";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import Edit from "./edit.vue";
 import ExamineFirst from "./examinefirst.vue";
 import MyCalendar from "./mycalendar.vue";
@@ -259,5 +269,8 @@ function handleExport() {
   );
 }
 
-getList();
+onMounted(() => {
+  proxy.$modal.notifyWarning("请及时更新超过使用期限的档案状态！");
+  getList();
+})
 </script>

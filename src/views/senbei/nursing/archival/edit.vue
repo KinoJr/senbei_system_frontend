@@ -9,7 +9,8 @@
       </el-form-item>
       <el-form-item label="客户账号" prop="archivalAppId">
         <el-select v-model="form.archivalAppId" filterable placeholder="请绑定客户账号" style="width: 100%" @change="onChange">
-          <el-option v-for="item in props.appOptions" :key="item.value" :label="item.label" :value="item.value" />
+          <el-option v-for="item in props.appOptions" :key="item.value" :label="`${item.label} <${item.name}>`"
+            :value="item.value" />
         </el-select>
       </el-form-item>
       <el-form-item label="入馆姓名" prop="archivalName">
@@ -61,8 +62,12 @@
       </div>
     </template>
   </el-dialog>
+
+  <Edit v-if="open" ref="editRef" :appOptions="props.appOptions" :roomOptions="props.roomOptions" />
+
 </template>
 <script setup name="edit">
+import Edit from "./edit.vue";
 import { ref } from "vue";
 import {
   addArchival,
@@ -78,6 +83,8 @@ const open = ref(false);
 const title = ref("");
 const form = ref({});
 const yType = ref();
+
+const editRef = ref();
 
 const rules = {
   archivalRoomId: [{ required: true, message: "房间编号不能为空", trigger: "blur" }],
@@ -135,15 +142,29 @@ function submitForm() {
     if (valid) {
       if (form.value.archivalId != undefined) {
         updateArchival(form.value).then((response) => {
-          proxy.$modal.msgSuccess("修改成功");
-          open.value = false;
-          emits("onClose");
+          if (response.oldArchivalId > 0) {
+            proxy.$modal.confirm('该时间段正在使用或已被预订,是否跳转至正在占用的档案?').then(function () {
+              // 打开对话框
+              editRef.value?.handleUpdate(response.oldArchivalId);
+            }).catch(() => { });
+          } else {
+            proxy.$modal.msgSuccess("修改成功");
+            open.value = false;
+            emits("onClose");
+          }
         });
       } else {
         addArchival(form.value).then((response) => {
-          proxy.$modal.msgSuccess("新增成功");
-          open.value = false;
-          emits("onClose");
+          if (response.oldArchivalId > 0) {
+            proxy.$modal.confirm('该时间段正在使用或已被预订,是否跳转至正在占用的档案?').then(function () {
+              // 打开对话框
+              editRef.value?.handleUpdate(response.oldArchivalId);
+            }).catch(() => { });
+          } else {
+            proxy.$modal.msgSuccess("新增成功");
+            open.value = false;
+            emits("onClose");
+          }
         });
       }
     }
@@ -169,7 +190,6 @@ function reset() {
   };
   proxy.resetForm("archivalRef");
 }
-
 defineExpose({
   handleAdd,
   handleUpdate,

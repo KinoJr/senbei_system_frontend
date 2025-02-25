@@ -95,11 +95,8 @@
          </el-table-column>
          <el-table-column label="结算状态" align="center" prop="shoppingSettlement">
             <template #default="scope">
-               <el-tag v-if="scope.row.shoppingSettlement == '0'" effect="light" type="warning">
-                  未结算
-               </el-tag>
-               <el-tag v-if="scope.row.shoppingSettlement == '1'" effect="light" type="success">
-                  已结算
+               <el-tag effect="light" :type="scope.row.shoppingSettlement == '0' ? 'warning' : 'success'">
+                  {{ scope.row.shoppingSettlement == '0' ? '未结算' : '已结算' }}
                </el-tag>
             </template>
          </el-table-column>
@@ -157,7 +154,7 @@ function getUserName(uid) {
    for (let index = 0; index < array.length; index++) {
       const element = array[index];
       if (element.userId === uid) {
-         return element.userName
+         return `${element.userName} <${element.nickName}>`
       }
    }
    return "-"

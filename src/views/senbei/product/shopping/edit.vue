@@ -7,7 +7,7 @@
             <el-form-item label="客户账号" prop="userId">
                 <el-select v-model="form.userId" filterable placeholder="请选择客户账号" style="width: 200px"
                     :disabled="form.shoppingId" @change="onChange">
-                    <el-option v-for="item in userOptions" :key="item.userId" :label="(item.userName + ' - ' + item.nickName)"
+                    <el-option v-for="item in userOptions" :key="item.userId" :label="`${item.userName} <${item.nickName}>`"
                         :value="item.userId" />
                 </el-select>
             </el-form-item>

@@ -74,8 +74,8 @@
                <el-table-column label="序号" type="index" width="80" />
                <!-- <el-table-column :label="$t('user.t.userId')" align="center" key="userId" prop="userId"
                   v-if="columns[0].visible" /> -->
-               <el-table-column label="用户账户" align="center" key="userName" prop="userName"
-                  v-if="columns[1].visible" :show-overflow-tooltip="true" />
+               <el-table-column label="用户账户" align="center" key="userName" prop="userName" v-if="columns[1].visible"
+                  :show-overflow-tooltip="true" />
                <el-table-column :label="$t('user.t.nickName')" align="center" key="nickName" prop="nickName"
                   v-if="columns[2].visible" :show-overflow-tooltip="true" />
                <el-table-column :label="$t('user.t.deptName')" align="center" key="deptName" prop="dept.deptName"
@@ -136,7 +136,9 @@
                   </div>
                   <span>仅允许导入xls、xlsx格式文件。</span>
                   <el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;"
-                     @click="importTemplate">下载模板</el-link>
+                     href="/temp/user_temp.xlsx">下载模板</el-link>
+                  <!-- <el-link type="primary" :underline="false" style="font-size:12px;vertical-align: baseline;"
+                     @click="importTemplate" href="/temp/user_temp.xlsx">下载模板</el-link> -->
                </div>
             </template>
          </el-upload>
